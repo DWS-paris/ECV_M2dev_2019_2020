@@ -1,11 +1,20 @@
 <h2>Ajouter un article</h2>
 
-<form action="">
+<form [formGroup]="form" (submit)="addPost.emit(form.value)">
   <label for="title">Titre</label>
-  <input type="text" id="title" name="title" required minlength="5">
+  <input 
+    type="text" id="title" name="title" required minlength="5"
+    formControlName="title"
+  >
 
   <label for="body">Contenu</label>
-  <textarea name="body" id="body" required minlength="5"></textarea>
+  <textarea 
+    name="body" id="body" required minlength="5"
+    formControlName="body"
+  ></textarea>
 
-  <button type="submit">Ajouter</button>
+  <button 
+    type="submit"
+    [disabled]="!form.valid"
+  >Ajouter</button>
 </form>

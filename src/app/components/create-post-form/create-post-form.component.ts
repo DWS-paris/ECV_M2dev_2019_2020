@@ -1,7 +1,7 @@
 /* 
 Imports & definition 
 */
-  import { Component, OnInit } from '@angular/core';
+  import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
   // Gestion des formulaires
   import { FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -20,6 +20,7 @@ Export
     /* 
     Declaration
     */
+      @Output() addPost = new EventEmitter();
       public form: FormGroup;
     //
     constructor( private FormBuilder: FormBuilder ) { }
@@ -31,12 +32,14 @@ Export
         // Configurer le formulaire
         this.form = this.FormBuilder.group({
           title: [ undefined, Validators.required ],
-          body: [ undefined, Validators.required ]
+          body: [ undefined, Validators.required ],
+          userId: 1
         });
       }
     //
 
     ngOnInit() {
+      this.resetForm();
     }
 
   }
