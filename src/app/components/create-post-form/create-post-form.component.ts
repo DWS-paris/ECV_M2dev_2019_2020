@@ -1,7 +1,7 @@
 /* 
 Imports & definition 
 */
-  import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+  import { Component, OnInit, OnChanges, Output, Input, EventEmitter } from '@angular/core';
 
   // Gestion des formulaires
   import { FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -15,12 +15,14 @@ Imports & definition
 /* 
 Export
 */
-  export class CreatePostFormComponent implements OnInit {
+  export class CreatePostFormComponent implements OnInit, OnChanges {
+    
 
     /* 
     Declaration
     */
       @Output() addPost = new EventEmitter();
+      @Input() newPostCreated: Boolean;
       public form: FormGroup;
     //
     constructor( private FormBuilder: FormBuilder ) { }
@@ -40,6 +42,13 @@ Export
 
     ngOnInit() {
       this.resetForm();
+    }
+
+    ngOnChanges(changes: any) {
+      // Vider le formulaire
+      if( changes.newPostCreated.firstChange === false ){
+        this.resetForm();
+      }
     }
 
   }

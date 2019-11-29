@@ -2,7 +2,7 @@
 Imports
 */
   import { Injectable } from '@angular/core';
-  import { HttpClient } from '@angular/common/http';
+  import { HttpClient, HttpHeaders } from '@angular/common/http';
 //
 
 /* 
@@ -26,8 +26,14 @@ Definition & export
     Methods CRUD
     */
       // CRUD: Create
-      public createItem = () => {
-
+      public createItem = (endpoint: string, data: any) => {
+        // Set header
+        let myHeader = new HttpHeaders();
+        myHeader.append('Content-Type', 'application/json; charset=UTF-8');
+        
+        return this.HttpClient.post(`${this.apiUrl}/${endpoint}`, data, 
+        { headers: myHeader })
+        .toPromise().then(this.getData).catch(this.handleError);
       }
 
       // CRUD: Read

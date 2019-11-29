@@ -1,20 +1,40 @@
-import { Component, OnInit } from '@angular/core';
-import { PostModel } from '../../models/post.model';
+/* 
+Imports & definition 
+*/
+  import { Component, OnInit } from '@angular/core';
+  import { PostModel } from '../../models/post.model';
+  import { CrudService } from "../../services/crud/crud.service";
 
-@Component({
-  selector: 'app-create-post-page',
-  templateUrl: './create-post-page.component.html',
-  styles: []
-})
-export class CreatePostPageComponent implements OnInit {
+  @Component({
+    selector: 'app-create-post-page',
+    templateUrl: './create-post-page.component.html'
+  })
+//
 
-  constructor() { }
+/* 
+Export
+*/
+  export class CreatePostPageComponent implements OnInit {
 
-  public createNewPost = (postData: PostModel) => {
-    console.log({postData})
+    public newPostCreated: Boolean = false;
+
+    constructor(
+      private CrudService: CrudService
+    ) { }
+
+    public createNewPost = (postData: PostModel) => {
+      this.CrudService.createItem('posts', postData)
+      .then( apiResponse => {
+        console.log(apiResponse)
+        this.newPostCreated = true;
+      })
+      .catch( apiResponse => {
+        console.error(apiResponse)
+      })
+    }
+
+    ngOnInit() {
+    }
+
   }
-
-  ngOnInit() {
-  }
-
-}
+//
