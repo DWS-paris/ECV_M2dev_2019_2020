@@ -1,4 +1,9 @@
 <h2 [innerText]="post.title"></h2>
 <p [innerText]="post.body"></p>
 
-<button (click)="sendPostId.emit(post.id)">Read more...</button>
+<button 
+    (click)="sendPostId.emit({ id: post.id, action: 'read' })"
+>Read more...</button>
+<button 
+    (click)="sendPostId.emit({ id: post.id, action: 'edit' })"
+>Edit</button>

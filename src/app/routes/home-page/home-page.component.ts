@@ -41,8 +41,10 @@ Definition & export
         })
       }
 
-      public openPostPage = ( id: Number ) => {
-        this.Router.navigateByUrl(`/post/${id}`)
+      public openPostPage = ( event: any ) => {
+        event.action === 'read'
+        ? this.Router.navigateByUrl(`/post/${event.id}`)
+        : this.Router.navigateByUrl(`/edit/${event.id}`)
       }
     //
 

@@ -1,6 +1,9 @@
 <h2>Ajouter un article</h2>
 
-<form [formGroup]="form" (submit)="addPost.emit(form.value)">
+<form   
+  [formGroup]="form" 
+  (submit)="addPost.emit({ data: form.value, action: action })"
+>
   <label for="title">Titre</label>
   <input 
     type="text" id="title" name="title" required minlength="5"

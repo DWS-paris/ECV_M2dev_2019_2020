@@ -1,0 +1,7 @@
+<h2>Edit post</h2>
+<app-create-post-form
+  *ngIf="postData"
+  (addPost)="editPost($event)"
+  [newPostCreated]="newPostEdited"
+  [postData]="postData"
+></app-create-post-form>
