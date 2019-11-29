@@ -12,6 +12,7 @@ export class EditPostPageComponent implements OnInit {
 
   public newPostEdited: Boolean = false;
   public postData: PostModel;
+  public postId: string;
 
   constructor(
     private ActivatedRoute: ActivatedRoute,
@@ -27,11 +28,16 @@ export class EditPostPageComponent implements OnInit {
   }
 
   public editPost = event => {
-    console.log(event)
+    this.CrudService.updateItem(`posts/${this.postId}`, event.data)
+    .then( apiResponse => console.log(apiResponse))
+    .catch( apiResponse => {
+      console.error(apiResponse)
+    })
   }
 
   ngOnInit() {
-    this.getPostData( this.ActivatedRoute.snapshot.params['id'] )
+    this.postId = this.ActivatedRoute.snapshot.params['id'];
+    this.getPostData( this.postId )
   }
 
 }

@@ -49,13 +49,20 @@ Definition & export
       }
 
       // CRUD: Update
-      public updateItem = () => {
+      public updateItem = (endpoint: string, data: any) => {
+        // Set header
+        let myHeader = new HttpHeaders();
+        myHeader.append('Content-Type', 'application/json; charset=UTF-8');
         
+        return this.HttpClient.put(`${this.apiUrl}/${endpoint}`, data, 
+        { headers: myHeader })
+        .toPromise().then(this.getData).catch(this.handleError);
       }
 
       // CRUD: Delete
-      public deleteItem = () => {
-        
+      public deleteItem = ( endpoint: string, id:string ) => {
+        return this.HttpClient.delete(`${this.apiUrl}/${endpoint}/${id}`)
+        .toPromise().then(this.getData).catch(this.handleError);
       }
     //
 

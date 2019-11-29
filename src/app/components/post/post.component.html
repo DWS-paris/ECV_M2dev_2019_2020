@@ -7,3 +7,7 @@
 <button 
     (click)="sendPostId.emit({ id: post.id, action: 'edit' })"
 >Edit</button>
+
+<button 
+    (click)="sendPostId.emit({ id: post.id, action: 'delete' })"
+>Delete</button>

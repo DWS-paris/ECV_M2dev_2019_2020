@@ -42,9 +42,21 @@ Definition & export
       }
 
       public openPostPage = ( event: any ) => {
-        event.action === 'read'
-        ? this.Router.navigateByUrl(`/post/${event.id}`)
-        : this.Router.navigateByUrl(`/edit/${event.id}`)
+        if(event.action === 'read'){
+          this.Router.navigateByUrl(`/post/${event.id}`)
+        }
+        else if( event.action === 'edit' ){
+          this.Router.navigateByUrl(`/edit/${event.id}`)
+        }
+        else if( event.action === 'delete' ){
+          this.CrudService.deleteItem('posts', event.id)
+          .then( apiResponse => {
+            console.log(apiResponse)
+          })
+          .catch( apiResponse => {
+            console.error(apiResponse)
+          })
+        }
       }
     //
 
