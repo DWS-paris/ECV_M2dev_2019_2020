@@ -1,0 +1,8 @@
+<ul *ngIf="postCollection">
+  <li *ngFor="let item of postCollection">
+    <app-post
+      [post]="item"
+      (sendPostId)="openPostPage($event)"
+    ></app-post>
+  </li>
+</ul>
